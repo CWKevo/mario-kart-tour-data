@@ -1,0 +1,17 @@
+{% for cup_id, cup in CUPS.items() %}
+<h1>Cup: {{ cup.name }}</h1>
+
+    {% for course in cup.courses %}
+    <h2>Course: {{ course.track.name }}</h2>
+
+        <h2>Three Item Slot Drivers:</h2>
+        {% for driver in course.three_item_slot_drivers %}
+            <p>{{ driver.name }} | {{ driver.special_powerup.name }}</p>
+        {% endfor %}
+
+        <h2>Two Item Slot Drivers:</h2>
+        {% for driver in course.track.two_item_slot_drivers %}
+            <p>{{ driver.name }} | {{ driver.special_powerup.name }}</p>
+        {% endfor %}
+    {% endfor %}
+{% endfor %}
