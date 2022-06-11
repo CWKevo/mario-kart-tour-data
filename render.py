@@ -21,7 +21,7 @@ def render() -> str:
 
 
 if __name__ == '__main__':
-    with open(ROOT_PATH / 'web' / 'render.html', 'w') as render_file:
+    with open(ROOT_PATH / 'web' / 'index.html', 'w') as render_file:
         render_file.write(render())
 
     print('Rendered!')
