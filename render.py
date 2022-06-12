@@ -1,5 +1,3 @@
-import typing as t
-
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 

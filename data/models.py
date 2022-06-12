@@ -4,7 +4,7 @@ from enum import Enum
 from dataclasses import dataclass, field
 
 
-__all__ = ['Rarity', 'Powerup', 'Driver', 'Track', 'Course', 'Cup']
+__all__ = ['Rarity', 'Powerup', 'Driver', 'Track', 'Course', 'Cup', 'Tour']
 
 
 class Rarity(Enum):
@@ -78,3 +78,10 @@ class Cup:
         for course in self.courses:
             if self.favored_driver != course.favored_driver and self.favored_driver not in course.track.three_item_slot_drivers:
                 course.track.two_item_slot_drivers.append(self.favored_driver)
+
+
+
+@dataclass
+class Tour:
+    name: str
+    cups: t.List[Cup] = field(default_factory=list)
