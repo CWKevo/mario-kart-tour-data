@@ -1,10 +1,32 @@
 from pathlib import Path
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
-from data import CUPS
+from data.models import Driver
+from data import TOURS
 
 ROOT_PATH = Path(__file__).parent.absolute()
-TEMPLATE_ENVIRONMENT = Environment(loader=FileSystemLoader(ROOT_PATH / 'data'))
+TEMPLATE_ENVIRONMENT = Environment(loader=FileSystemLoader(ROOT_PATH / 'data'), undefined=StrictUndefined)
+
+
+
+def most_favored_driver() -> Driver:
+    """
+        Returns the most favored driver.
+    """
+
+    counts = {}
+
+    for tour in TOURS:
+        for cups in tour.cups:
+            for course in cups.courses:
+                for driver in course.three_item_slot_drivers:
+                    try:
+                        counts[driver.name] += 1
+
+                    except KeyError:
+                        counts[driver.name] = 1
+    
+    return max(counts, key=counts.get)
 
 
 
@@ -14,7 +36,7 @@ def render() -> str:
     """
 
     template = TEMPLATE_ENVIRONMENT.get_template('index.html')
-    return template.render(CUPS=CUPS)
+    return template.render(TOURS=TOURS, most_favored_driver=most_favored_driver())
 
 
 

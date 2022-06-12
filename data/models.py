@@ -49,21 +49,17 @@ class Track:
 
 
 
-@dataclass
 class Course:
-    track: Track
-    favored_driver: Driver
-    is_bonus: bool = False
+    def __init__(self, track: Track, favored_driver: Driver, is_bonus: bool = False):
+        self.track = track
+        self.favored_driver = favored_driver
+        self.is_bonus = is_bonus
 
+        self.two_item_slot_drivers = self.track.two_item_slot_drivers
+        self.three_item_slot_drivers = self.track.three_item_slot_drivers
 
-    @property
-    def three_item_slot_drivers(self) -> t.List[Driver]:
-        th_isd = self.track.three_item_slot_drivers
-
-        if self.favored_driver not in th_isd:
-            th_isd.append(self.favored_driver)
-
-        return th_isd
+        if self.favored_driver not in self.three_item_slot_drivers:
+            self.three_item_slot_drivers.append(self.favored_driver)
 
 
 
@@ -76,8 +72,8 @@ class Cup:
 
     def __post__init__(self):
         for course in self.courses:
-            if self.favored_driver != course.favored_driver and self.favored_driver not in course.track.three_item_slot_drivers:
-                course.track.two_item_slot_drivers.append(self.favored_driver)
+            if self.favored_driver != course.favored_driver and self.favored_driver not in course.three_item_slot_drivers:
+                course.two_item_slot_drivers.append(self.favored_driver)
 
 
 

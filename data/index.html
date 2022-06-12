@@ -1,17 +1,38 @@
-{% for cup_id, cup in CUPS.items() %}
-<h1>Cup: {{ cup.name }}</h1>
+{% extends 'macros.html' %}
 
-    {% for course in cup.courses %}
-    <h2>Course: {{ course.track.name }}</h2>
+{% block content %}
 
-        <h2>Three Item Slot Drivers:</h2>
-        {% for driver in course.three_item_slot_drivers %}
-            <p>{{ driver.name }} | {{ driver.special_powerup.name }}</p>
-        {% endfor %}
+<p>Most favored driver: <b>{{ most_favored_driver }}</b></p>
 
-        <h2>Two Item Slot Drivers:</h2>
-        {% for driver in course.track.two_item_slot_drivers %}
-            <p>{{ driver.name }} | {{ driver.special_powerup.name }}</p>
-        {% endfor %}
+{% for tour in TOURS %}
+    <h1>{{ tour.name }}</h1>
+
+    {% for cup in tour.cups %}
+    <h2>Cup: {{ cup.name }}</h2>
+
+        <ol>
+            {% for course in cup.courses %}
+            <li>Course: {{ course.track.name }}</li>
+
+                {% if course.three_item_slot_drivers | length > 0 %}
+                <h3>Three Item Slot Drivers:</h3>
+                <ul>
+                    {% for driver in course.three_item_slot_drivers %}
+                    <li>{{ driver.name }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                {% if course.two_item_slot_drivers | length > 0 %}
+                <h3>Two Item Slot Drivers:</h3>
+                <ul>
+                    {% for driver in course.two_item_slot_drivers %}
+                    <li>{{ driver.name }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            {% endfor %}
+        </ol>
     {% endfor %}
 {% endfor %}
+{% endblock %}

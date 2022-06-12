@@ -12,7 +12,7 @@ POWERUPS = {
     "RED_SHELL": Powerup(name='Red Shell', description='Homes in on a kart in front of you and crashes whatever it hits. Keep it behind your kart to protect yourself from a single attack.'),
     "SPINY_SHELL": Powerup(name='Spiny Shell', description='Chases down the kart in 1st place, crashing through anyone it hits before reaching its target. This will make you regret being in 1st place! Or even near the kart in 1st place...'),
     "BOWSER_SHELL": Powerup(name="Bowser's Shell", description="This big ol' shell on loan from Bowser will crash any karts it hits and keep on going. It can only be thrown forward.", special=True, plus_description="Bowser's Shell is bigger and a little better at tracking opponents."),
-    "BOBOMB": Powerup(name='Bob-omb', descriptions='This will walk towards opponents who get too close, and then explode when it touches a kart or when some time has passed. Karts caught in its blast will crash.'),
+    "BOBOMB": Powerup(name='Bob-omb', description='This will walk towards opponents who get too close, and then explode when it touches a kart or when some time has passed. Karts caught in its blast will crash.'),
     "DOUBLE_BOBOMBS": Powerup(name='Double Bob-ombs', description='Two Bob-ombs will revolve around your kart. Tap the screen to throw them both at once. Two is better than one, right?', special=True, plus_description='Adds a Bob-omb so you can attack with 3 Bob-ombs.'),
     "MUSHROOM": Powerup(name='Mushroom', description="This classic item gives your kart a speed boost. Doesn't get much simpler than that!"),
     "TRIPLE_MUSHROOMS": Powerup(name='Triple Mushrooms', description='Why use just one Mushroom when you can use three? Tap the screen to use them all at once for a longer-lasting speed boost.', special=True, plus_description='Increases your chances of getting Triple Mushrooms and extends the dash time by a little.'),
@@ -112,8 +112,13 @@ TRACKS = {
     "RT_VANILLA_LAKE_1": Track(name='Vanilla Lake 1R/T', two_item_slot_drivers=[], three_item_slot_drivers=[DRIVERS['BABY_MARIO'].lvl(6)]),
 }
 
-TOURS = {
-    Tour('Cat Tour', cups=[
-        'TODO'
+TOURS = [
+    Tour(name='Cat Tour', cups=[
+        Cup(name='Test Cup', favored_driver=DRIVERS['WALUIGI'], courses=(
+            Course(track=TRACKS['MARIO_CIRCUIT_1'], favored_driver=DRIVERS['MARIO']),
+            Course(track=TRACKS['T_MARIO_CIRCUIT_1'], favored_driver=DRIVERS['FREERUNNING_PURPLE_KOOPA']),
+            Course(track=TRACKS['WALUIGI_PINBALL'], favored_driver=DRIVERS['WALUIGI']),
+            Course(track=TRACKS['RT_VANILLA_LAKE_1'], favored_driver=DRIVERS['SHY_GUY'], is_bonus=True)
+        ))
     ])
-}
+]

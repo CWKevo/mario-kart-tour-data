@@ -1,0 +1,9 @@
+{% macro card(title, image_url="https://static.wikia.nocookie.net/mariokart/images/7/76/Baby_Daisy_Tour.jpg/revision/latest") %}
+    <div style="width: 100px; height: 200px; display: flex; flex-direction: column;">
+        <img width="100px" height="200px" src="{{ image_url }}">
+        <h3 style="text-align: center;">{{ title }}</h3>
+    </div>
+{% endmacro %}
+
+
+{% block content %}{% endblock content %}
